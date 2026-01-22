@@ -54,11 +54,14 @@ body {
   background-color: var(--sable);
   color: var(--gris-fonce);
 }
-
+.form-group{
+    margin-right: 5px;
+    margin-left: 5px;
+}
 /* CONTENEUR */
 .container {
-  max-width: 900px;
-  margin: 40px auto;
+  max-width: 1000px;
+  margin: 30px auto;
   background: white;
   border-radius: var(--rayon);
   box-shadow: 0 8px 25px rgba(0,0,0,0.1);
@@ -159,7 +162,7 @@ input {
 .success-message.active {
   display: block;
 }
-
+textarea { width: 100%; padding: 8px; box-sizing: border-box; }
 /* RESPONSIVE */
 @media (max-width: 768px) {
   .container {

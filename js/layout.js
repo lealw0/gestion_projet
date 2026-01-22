@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const nav = document.createElement("nav");
   nav.classList.add("nav-buttons");
   nav.innerHTML = `
-    <a href="../gestion_projet/accueil/accueil.html" class="nav-btn">Accueil</a>
+    <a href="accueil.html" class="nav-btn">Accueil</a>
     <a href="page2.html" class="nav-btn">Événements</a>
     <a href="formulaire.html" class="nav-btn">Contact</a>
   `;

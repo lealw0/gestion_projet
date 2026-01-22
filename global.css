@@ -4,7 +4,8 @@
 header {
   position: relative;
   background-image: url("images/phare_minou.avif");
-  background-position: top;
+  background-size: cover; 
+  background-position: top; /* "center" est souvent mieux que "top" pour le responsive */
   background-repeat: no-repeat;
   color: white;
   height: 40vh;

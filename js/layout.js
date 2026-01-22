@@ -1,19 +1,30 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  /* ===== HEADER ===== */
+  /* ===== HEADER (BANDEAU SEUL) ===== */
   const header = document.createElement("header");
   header.innerHTML = `
-    <div class="site-header">
-      <h1>Diwallerien ar Vorlen</h1>
-      <p class="subtitle">Les sentinelles de la rade</p>
-      <nav>
-        <a href="acceuil/acceuil.html">Accueil</a>
-        <a href="page2_V1.html">Evenements</a>
-        <a href="formulaire/formulaire.html">Contact</a>
-      </nav>
-    </div>
+    
+      
+        <div class="header-left">
+          <img src="images/logo.jpg" alt="Logo Diwallerien ar Vorlen" class="logo">
+        </div>
+
+        <div class="header-center">
+          <h1>Diwallerien ar Vorlen</h1>
+          <p class="subtitle">Les sentinelles de la rade</p>
+        </div>
+     
+   
   `;
-  document.body.prepend(header);
+
+  /* ===== NAVIGATION (EN DEHORS DU BANDEAU) ===== */
+  const nav = document.createElement("nav");
+  nav.classList.add("nav-buttons");
+  nav.innerHTML = `
+    <a href="acceuil/acceuil.html" class="nav-btn">Accueil</a>
+    <a href="page2_V1.html" class="nav-btn">Événements</a>
+    <a href="formulaire/formulaire.html" class="nav-btn">Contact</a>
+  `;
 
   /* ===== FOOTER ===== */
   const footer = document.createElement("footer");
@@ -23,6 +34,10 @@ document.addEventListener("DOMContentLoaded", () => {
       <p>Protection du littoral de la rade de Brest</p>
     </div>
   `;
+
+  /* INSERTION DANS LE DOM */
+  document.body.prepend(nav);
+  document.body.prepend(header);
   document.body.appendChild(footer);
 
 });

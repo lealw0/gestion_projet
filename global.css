@@ -279,3 +279,25 @@ textarea { width: 100%; padding: 8px; box-sizing: border-box; }
     transform: translateY(0);
   }
 }
+.formulaire_contact_nomprenom{
+    display: flex;
+    width: 100%;
+    
+}
+.formulaire_contact_coordonnees{
+    display: block;
+    width: 99%;
+    
+}
+button#button_formulaire_contact{
+    width: 100%;
+    background-color: var(--bleu-ocean);
+    color: white;
+    padding: 6px;
+}
+h2 {
+  color: var(--bleu-ocean);
+  padding: 10px;
+  margin-left: 35%
+
+}

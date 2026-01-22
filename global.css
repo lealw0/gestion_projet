@@ -49,12 +49,12 @@ header {
 
 .header-center h1 {
   margin: 0;
-  font-size: 2rem;
+  font-size: 3rem;
 }
 
 .subtitle {
   margin-top: 5px;
-  font-size: 1.1rem;
+  font-size: 2rem;
   opacity: 0.95;
 }
 
@@ -545,7 +545,8 @@ cite {
 }
 
 .image-placeholder_accueil img {
-    width: 100%;
+    width: 50%;
+
     border-radius: 10px;
 }
 

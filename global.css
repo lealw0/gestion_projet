@@ -3,8 +3,7 @@
 
 header {
   position: relative;
-  background-image: url("images/images.jpg");
-  background-size: cover;
+  background-image: url("images/phare_minou.avif");
   background-position: top;
   background-repeat: no-repeat;
   color: white;
@@ -69,7 +68,7 @@ header {
 }
 
 .nav-btn {
-  background-color: var(--vert-nature);
+  background-color: var(--bleu-ocean);
   color:  #f4f1ec;
   text-decoration: none;
   padding: 15px 30px;
@@ -79,7 +78,7 @@ header {
 }
 
 .nav-btn:hover {
-  background-color: #3e8e41;
+  background-color: #095960;
   transform: translateY(-2px);
 }
 

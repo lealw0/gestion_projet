@@ -28,6 +28,22 @@
 
     <div class="content">
         <div class="left-section">
+            <!-- Section de filtre -->
+            <div class="filter-section">
+                <h3>📅 Trier par date</h3>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" onclick="filterSessions('recent')">
+                        ⬆️ Plus récent
+                    </button>
+                    <button class="filter-btn" onclick="filterSessions('ancien')">
+                        ⬇️ Plus ancien
+                    </button>
+                    <button class="filter-btn" onclick="filterSessions('default')">
+                        🔄 Ordre par défaut
+                    </button>
+                </div>
+            </div>
+
             <div class="session-list" id="sessionList"></div>
 
             <div class="registration-form" id="registrationForm">
@@ -103,7 +119,8 @@ const sessions = [
     { 
         id: 1, 
         titre: "Nettoyage Plage de Plouzané", 
-        date: "Samedi 15 mars 2025", 
+        date: "Samedi 15 mars 2025",
+        dateSort: "2025-03-15",
         horaire: "09h - 12h", 
         plage: "Plage du Petit Minou", 
         lieu: "Plouzané",
@@ -113,7 +130,8 @@ const sessions = [
     { 
         id: 2, 
         titre: "Ramassage Plougastel", 
-        date: "Dimanche 16 mars 2025", 
+        date: "Dimanche 16 mars 2025",
+        dateSort: "2025-03-16",
         horaire: "14h - 17h", 
         plage: "Plage de Porz Don", 
         lieu: "Plougastel",
@@ -124,6 +142,7 @@ const sessions = [
         id: 3,
         titre: "Nettoyage Plage de Brest",
         date: "Samedi 22 mars 2025",
+        dateSort: "2025-03-22",
         horaire: "10h - 13h",
         plage: "Plage du Moulin Blanc",
         lieu: "Brest",
@@ -134,26 +153,53 @@ const sessions = [
         id: 4,
         titre: "Ramassage Plage de Saint Anne",
         date: "Dimanche 23 mars 2025",
+        dateSort: "2025-03-23",
         horaire: "08h30 - 11h30",
         plage: "Plage de Saint Anne",
         lieu: "Brest",
         lat: 48.36182,
         lng: -4.55220
-
     }
 ];
 
 let selectedSessionId = null;
+let currentFilter = 'recent';
+let displayedSessions = [...sessions];
+
+function filterSessions(filterType) {
+    currentFilter = filterType;
+    
+    // Mettre à jour les boutons actifs
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    event.target.classList.add('active');
+    
+    // Trier les sessions selon le filtre
+    if (filterType === 'recent') {
+        displayedSessions = [...sessions].sort((a, b) => 
+            new Date(a.dateSort) - new Date(b.dateSort)
+        );
+    } else if (filterType === 'ancien') {
+        displayedSessions = [...sessions].sort((a, b) => 
+            new Date(b.dateSort) - new Date(a.dateSort)
+        );
+    } else {
+        displayedSessions = [...sessions];
+    }
+    
+    renderSessions();
+}
 
 function renderSessions() {
-    document.getElementById("sessionList").innerHTML = sessions.map(s => `
-        <div class="session-item" data-id="${s.id}">
+    document.getElementById("sessionList").innerHTML = displayedSessions.map(s => `
+        <div class="session-item ${selectedSessionId === s.id ? 'selected' : ''}" data-id="${s.id}">
             <div class="session-header">
                 <div>
                     <h3 class="session-title">${s.titre}</h3>
                 </div>
-                <button class="btn-secondary" onclick="selectSession(${s.id})">
-                    Je participe
+                <button class="btn-secondary ${selectedSessionId === s.id ? 'selected' : ''}" onclick="selectSession(${s.id})">
+                    ${selectedSessionId === s.id ? '✓ Sélectionné' : 'Je participe'}
                 </button>
             </div>
             <div class="session-info">
@@ -175,22 +221,39 @@ function renderSessions() {
 }
 
 function selectSession(id) {
+    // Si on clique sur la même session, on la désélectionne
+    if (selectedSessionId === id) {
+        selectedSessionId = null;
+        
+        // Réinitialiser tous les marqueurs en bleu
+        Object.keys(markers).forEach(markerId => {
+            markers[markerId].setIcon(defaultIcon);
+        });
+        
+        // Masquer le formulaire et le message de succès
+        document.getElementById("registrationForm").classList.remove("active");
+        document.getElementById("successMessage").classList.remove("active");
+        
+        // Réafficher les sessions
+        renderSessions();
+        
+        return;
+    }
+    
     selectedSessionId = id;
     
-    // Mettre à jour l'apparence des sessions
-    document.querySelectorAll('.session-item').forEach(item => {
-        item.classList.remove('selected');
-        const btn = item.querySelector('.btn-secondary');
-        btn.textContent = 'Je participe';
-        btn.classList.remove('selected');
+    // Réinitialiser tous les marqueurs en bleu
+    Object.keys(markers).forEach(markerId => {
+        markers[markerId].setIcon(defaultIcon);
     });
-
-    // Marquer la session sélectionnée
-    const selectedItem = document.querySelector(`[data-id="${id}"]`);
-    selectedItem.classList.add('selected');
-    const selectedBtn = selectedItem.querySelector('.btn-secondary');
-    selectedBtn.textContent = '✓ Sélectionné';
-    selectedBtn.classList.add('selected');
+    
+    // Mettre le marqueur sélectionné en vert
+    if (markers[id]) {
+        markers[id].setIcon(selectedIcon);
+    }
+    
+    // Réafficher les sessions avec la sélection mise à jour
+    renderSessions();
 
     // Afficher le formulaire et masquer le message de succès
     document.getElementById("registrationForm").classList.add("active");
@@ -214,7 +277,8 @@ document.getElementById("userForm").addEventListener("submit", e => {
         email: document.getElementById('email').value,
         telephone: document.getElementById('telephone').value,
         adresse: document.getElementById('adresse').value,
-        codePostal: document.getElementById('codePostal').value
+        codePostal: document.getElementById('codePostal').value,
+        duree: document.getElementById('duree').value
     };
 
     // Afficher les données dans la console
@@ -233,20 +297,43 @@ document.getElementById("userForm").addEventListener("submit", e => {
     });
 });
 
+// Icônes personnalisées pour les marqueurs
+const defaultIcon = L.icon({
+    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png',
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png',
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41]
+});
+
+const selectedIcon = L.icon({
+    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png',
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41]
+});
+
 const map = L.map("map").setView([48.38, -4.48], 10);
 
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     attribution: "© OpenStreetMap"
 }).addTo(map);
 
+// Stocker les marqueurs pour pouvoir les modifier
+const markers = {};
+
 sessions.forEach(session => {
-    const marker = L.marker([session.lat, session.lng]).addTo(map);
+    const marker = L.marker([session.lat, session.lng], { icon: defaultIcon }).addTo(map);
     marker.bindPopup(`<strong>${session.titre}</strong><br>${session.plage}`);
     marker.on("click", () => selectSession(session.id));
+    markers[session.id] = marker;
 });
 
-// Initialiser la page
-renderSessions();
+// Initialiser la page avec le filtre par défaut (plus récent)
+filterSessions('recent');
 </script>
 
 <script src="js/layout.js"></script>

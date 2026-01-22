@@ -683,3 +683,11 @@ cite {
     margin-bottom: 10px;
     color: #00a8cc;
 }
+
+html, body {
+  background-color: var(--sable);
+}
+.container,
+.containerp2 {
+  background-color: var(--sable);
+}

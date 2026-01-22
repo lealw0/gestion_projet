@@ -5,7 +5,7 @@ header {
   position: relative;
   background-image: url("images/phare_minou.avif");
   background-size: cover; 
-  background-position: top; /* "center" est souvent mieux que "top" pour le responsive */
+  background-position: center 25%; /* "center" est souvent mieux que "top" pour le responsive */
   background-repeat: no-repeat;
   color: white;
   height: 40vh;
@@ -466,12 +466,14 @@ select#sujet {
 button#button_formulaire_contact{
     width: 100%;
     background-color: var(--bleu-ocean);
+    font-size: 1.5rem;
     color: white;
     padding: 6px;
 }
 h2.h2_formulaire {
   color: var(--bleu-ocean);
   padding: 10px;
+  font-size: 2rem;
   text-align: center;
 }
 

@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
     
       
         <div class="header-left">
-          <img src="images/logo.jpg" alt="Logo Diwallerien ar Vorlen" class="logo">
+          <img src="images/logo.png" alt="Logo Diwallerien ar Vorlen" class="logo">
         </div>
 
         <div class="header-center">

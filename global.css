@@ -201,7 +201,9 @@ input {
   border-radius: var(--rayon);
   border: 1px solid #ccc;
 }
-
+input#nom, input#prenom {
+  width: 100;
+}
 /* BOUTONS */
 .btn-primary {
   background-color: var(--bleu-ocean);
@@ -266,7 +268,12 @@ textarea { width: 100%; padding: 8px; box-sizing: border-box; }
   border-radius: var(--rayon);
 }
 
-
+select#sujet {
+  width: 100%;
+  padding: 10px;
+  border-radius: var(--rayon);
+  border: 1px solid #ccc;
+} 
 
 /* ANIMATIONS */
 @keyframes fadeIn {

@@ -128,6 +128,7 @@ body {
   font-family: Arial, sans-serif;
   background-color: var(--sable);
   color: var(--gris-fonce);
+  
 }
 .form-group{
     margin-right: 5px;
@@ -242,5 +243,40 @@ textarea { width: 100%; padding: 8px; box-sizing: border-box; }
 @media (max-width: 768px) {
   .container {
     margin: 10px;
+  }
+}
+
+/* CARTE */
+.map-container {
+  background: #f0f4f8;
+  border-radius: var(--rayon);
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.map-title {
+  font-size: 1.3em;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: var(--bleu-ocean);
+}
+
+#map {
+  width: 100%;
+  height: 500px;
+  border-radius: var(--rayon);
+}
+
+
+
+/* ANIMATIONS */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

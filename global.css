@@ -280,3 +280,214 @@ textarea { width: 100%; padding: 8px; box-sizing: border-box; }
     transform: translateY(0);
   }
 }
+
+
+
+
+/*---------------------------------*/
+/*--------------ACCUEIL------------*/
+/*---------------------------------*/ 
+.container_accueil {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.section-padding {
+    padding: 80px 0;
+}
+
+.bg-light {
+    background-color: var(--gris-clair);
+}
+
+h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    color: var(--dark-color);
+}
+
+/* Grilles */
+.grid-accueil {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+}
+
+.team-grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+/* Trombi */
+.team-card {
+    background: white;
+    padding: 30px 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    text-align: center;
+    /* On définit une largeur fixe ou minimale pour garantir l'uniformité */
+    min-width: 220px; 
+    max-width: 280px;
+    transition: transform 0.3s ease;
+}
+
+.team-card:hover {
+    transform: translateY(-5px);
+}
+
+.president-row {
+    display: flex;
+    justify-content: center; /* Centre la carte horizontalement */
+    margin-bottom: 30px;    /* Espace avec la ligne du dessous */
+}
+
+.avatar {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 15px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid var(--bleu-ocean); 
+}
+
+.avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.role {
+    color: var(--primary-color);
+    font-weight: bold;
+    font-size: 0.9rem;
+    margin-top: 5px;
+}
+
+/* Témoignages */
+blockquote {
+    background: white;
+    padding: 30px;
+    border-left: 5px solid var(--primary-color);
+    font-style: italic;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+cite {
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+    font-style: normal;
+    color: var(--primary-color);
+}
+
+/* Section Finale */
+.cta-final {
+    background-color: var(--gris-clair);
+    color: var(--gris-fonce);
+    text-align: center;
+}
+
+.image-placeholder_accueil img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.slider-wrapper{
+    width: 100%;
+    overflow-x: auto;
+    padding: 20px 0;
+    scrollbar-width: thin; /* Pour Firefox */
+}
+
+/* Style commun aux sliders */
+.testimonial-slider, .photo-slider {
+    display: flex;
+    gap: 25px;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 10px;
+}
+
+/* Cartes de témoignages */
+.testimonial-slider .card {
+    flex: 0 0 300px; /* Largeur fixe pour chaque carte */
+    scroll-snap-align: center;
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* Cartes Photo */
+.photo-card {
+    flex: 0 0 350px;
+    scroll-snap-align: center;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.photo-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover; /* Garde les proportions de l'image */
+}
+
+.legend {
+    padding: 15px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+}
+
+/* Grille des Logos */
+.logo-grid_accueil {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    opacity: 0.7;
+    filter: grayscale(100%); /* Optionnel : logos en noir et blanc */
+}
+
+.logo-grid_accueil img {
+    max-width: 150px;
+    transition: 0.3s;
+}
+
+.logo-grid_accueil img:hover {
+    filter: grayscale(0%);
+    opacity: 1;
+}
+
+.container_accueil p {
+    margin-bottom: 30px;  
+}
+
+/* Conteneur des boutons */
+.nav-button_accueil {
+    display: flex;
+    gap: 20px; 
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+}
+
+.texte-final {
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+.slogan {
+    font-size: 1.3rem;
+    display: inline-block;
+    margin-bottom: 10px;
+    color: #00a8cc;
+}

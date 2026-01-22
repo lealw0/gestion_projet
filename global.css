@@ -326,7 +326,7 @@ h2 {
     background-color: var(--gris-clair);
 }
 
-h2 {
+h2.h2_accueil {
     text-align: center;
     font-size: 2.5rem;
     margin-bottom: 40px;

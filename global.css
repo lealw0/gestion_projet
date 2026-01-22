@@ -1,4 +1,36 @@
 /* ===== CHARTE GRAPHIQUE – LITTORAL & ENVIRONNEMENT ===== */
+/* HEADER */
+.site-header {
+  background-color: var(--bleu-ocean);
+  color: white;
+  padding: 25px;
+  text-align: center;
+}
+
+.site-header nav {
+  margin-top: 15px;
+}
+
+.site-header nav a {
+  color: white;
+  margin: 0 12px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.site-header nav a:hover {
+  text-decoration: underline;
+}
+
+/* FOOTER */
+.site-footer {
+  background-color: var(--bleu-ocean);
+  color: white;
+  text-align: center;
+  padding: 20px;
+  margin-top: 40px;
+  font-size: 0.9em;
+}
 
 :root {
   --bleu-ocean: #0a6c74;

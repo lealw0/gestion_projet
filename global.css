@@ -503,10 +503,14 @@ h2.h2_accueil {
 .grid-accueil {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 40px;
+    gap: 0px;
     align-items: center;
 }
 
+.text-content{
+  margin-left: 20px;
+  text-align: justify;
+}
 .team-container {
     display: flex;
     flex-direction: column;
@@ -592,10 +596,14 @@ cite {
     text-align: center;
 }
 
-.image-placeholder_accueil img {
+.image_placeholder_accueil img {
     width: 50%;
-
     border-radius: 10px;
+}
+.image_placeholder_accueil{
+    display: flex;            /* Active le mode Flexbox */
+    justify-content: center;  /* Centre l'image horizontalement */
+    align-items: center;
 }
 
 .slider-wrapper{

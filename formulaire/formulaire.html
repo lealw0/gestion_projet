@@ -10,43 +10,52 @@
     <main>
         <div class="container">
             <h2>Formulaire de Contact</h2>
+            <hr>
+            <hr>
+            
             <form>
-                <div class="form-group">
-                    <label for="nom">Nom</label>
-                    <input type="text" id="nom" name="nom" required>
-                </div>
-                <div class="form-group">
-                    <label for="prenom">Prénom</label>
-                    <input type="text" id="prenom" name="prenom" required>
+                <div class="formulaire_contact_nomprenom">
+                    <div class="form-group">
+                        <label for="nom">Nom</label>
+                        <input type="text" id="nom" name="nom" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="prenom">Prénom</label>
+                        <input type="text" id="prenom" name="prenom" required>
+                    </div>
+
                 </div>
 
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="telephone">Numéro de Téléphone</label>
-                    <input type="tel" id="telephone" name="telephone" required>
-                </div>
+                <div class="formulaire_contact_coordonnees">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="telephone">Numéro de Téléphone</label>
+                        <input type="tel" id="telephone" name="telephone" required>
+                    </div>
 
-                <div class="form-group">
-                    <label for="sujet">Sujet de la demande</label>
-                    <select id="sujet" name="sujet" required>
-                        <option value="">-- Sélectionnez un sujet --</option>
-                        <option value="information">Demande d'information</option>
-                        <option value="group">Participer en groupe</option>
-                        <option value="partenariat">Proposition de partenariat</option>
-                        <option value="new_lieu">Proposition de nouveau lieu</option>
-                        <option value="autre">Autre</option>
-                    </select>
-                </div>
+                    <div class="form-group">
+                        <label for="sujet">Sujet de la demande</label>
+                        <select id="sujet" name="sujet" required>
+                            <option value="">-- Sélectionnez un sujet --</option>
+                            <option value="information">Demande d'information</option>
+                            <option value="group">Participer en groupe</option>
+                            <option value="partenariat">Proposition de partenariat</option>
+                            <option value="new_lieu">Proposition de nouveau lieu</option>
+                            <option value="autre">Autre</option>
+                        </select>
+                    </div>
 
-                <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea id="message" name="message" required></textarea>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
                 </div>
+                
 
-                <button type="submit">Envoyer</button>
+                <button type="submit" id="button_formulaire_contact">Envoyer</button>
             </form>
         </div>
         <script>

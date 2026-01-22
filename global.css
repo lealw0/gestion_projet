@@ -468,10 +468,10 @@ button#button_formulaire_contact{
     color: white;
     padding: 6px;
 }
-h2 {
+h2.h2_formulaire {
   color: var(--bleu-ocean);
   padding: 10px;
-  margin-left: 35%
+  text-align: center;
 }
 
 
@@ -496,7 +496,7 @@ h2.h2_accueil {
     text-align: center;
     font-size: 2.5rem;
     margin-bottom: 40px;
-    color: var(--dark-color);
+    color: var(--bleu-ocean);
 }
 
 /* Grilles */
@@ -507,10 +507,19 @@ h2.h2_accueil {
     align-items: center;
 }
 
-.team-grid{
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
+.team-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px; /* Espace entre les étages de la pyramide */
+    align-items: center;
+}
+/* Lignes de la pyramide */
+.team-row-2, .team-row-3 {
+    display: flex;
+    justify-content: center;
+    gap: 25px; /* Espace entre les cartes sur une même ligne */
+    flex-wrap: wrap;
+    width: 100%;
 }
 
 /* Trombi */
@@ -533,7 +542,7 @@ h2.h2_accueil {
 .president-row {
     display: flex;
     justify-content: center; /* Centre la carte horizontalement */
-    margin-bottom: 30px;    /* Espace avec la ligne du dessous */
+    margin-bottom: 10px;    /* Espace avec la ligne du dessous */
 }
 
 .avatar {

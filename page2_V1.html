@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sessions de Ramassage de Déchets</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            padding: 30px;
+            text-align: center;
+            color: white;
+        }
+
+        h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 1.1em;
+            opacity: 0.95;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .session-list {
+            margin-bottom: 30px;
+        }
+
+        .session-item {
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .session-item:hover {
+            border-color: #667eea;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
+        }
+
+        .session-item.selected {
+            border-color: #43e97b;
+            background: #f0fdf4;
+        }
+
+        .session-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .session-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .session-info {
+            margin-top: 10px;
+            color: #666;
+        }
+
+        .info-row {
+            display: flex;
+            align-items: center;
+            margin: 5px 0;
+        }
+
+        .info-icon {
+            margin-right: 8px;
+        }
+
+        .select-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background 0.3s ease;
+        }
+
+        .select-btn:hover {
+            background: #5568d3;
+        }
+
+        .select-btn.selected {
+            background: #43e97b;
+        }
+
+        .registration-form {
+            display: none;
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 10px;
+            margin-top: 30px;
+        }
+
+        .registration-form.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .form-title {
+            font-size: 1.5em;
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            color: #555;
+            margin-bottom: 8px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"] {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 5px;
+            font-size: 1em;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 5px;
+            font-size: 1.1em;
+            cursor: pointer;
+            width: 100%;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(67, 233, 123, 0.4);
+        }
+
+        .success-message {
+            display: none;
+            background: #43e97b;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 20px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .success-message.active {
+            display: block;
+        }
+
+        .required {
+            color: #e74c3c;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🌍 Sessions de Ramassage de Déchets</h1>
+            <p class="subtitle">Rejoignez-nous pour nettoyer nos plages !</p>
+        </header>
+
+        <div class="content">
+            <div class="session-list" id="sessionList">
+                <!-- Sessions générées dynamiquement -->
+            </div>
+
+            <div class="registration-form" id="registrationForm">
+                <h2 class="form-title">Formulaire d'inscription</h2>
+                <form id="userForm">
+                    <div class="form-group">
+                        <label for="nom">Nom <span class="required">*</span></label>
+                        <input type="text" id="nom" name="nom" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="prenom">Prénom <span class="required">*</span></label>
+                        <input type="text" id="prenom" name="prenom" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Adresse e-mail <span class="required">*</span></label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="telephone">Numéro de téléphone <span class="required">*</span></label>
+                        <input type="tel" id="telephone" name="telephone" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="adresse">Adresse postale <span class="required">*</span></label>
+                        <input type="text" id="adresse" name="adresse" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="codePostal">Code postal <span class="required">*</span></label>
+                        <input type="text" id="codePostal" name="codePostal" required>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Confirmer mon inscription</button>
+                </form>
+            </div>
+
+            <div class="success-message" id="successMessage">
+                <h2>✅ Inscription confirmée !</h2>
+                <p>Merci pour votre engagement. Vous recevrez un e-mail de confirmation prochainement.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Données des sessions
+        const sessions = [
+            {
+                id: 1,
+                titre: "Nettoyage Plage des Sables d'Or",
+                date: "Samedi 15 Mars 2025",
+                horaire: "09:00 - 12:00",
+                plage: "Plage des Sables d'Or",
+                lieu: "Saint-Malo"
+            },
+            {
+                id: 2,
+                titre: "Ramassage Plage du Deauville",
+                date: "Dimanche 16 Mars 2025",
+                horaire: "14:00 - 17:00",
+                plage: "Plage de Deauville",
+                lieu: "Deauville"
+            },
+            {
+                id: 3,
+                titre: "Opération Plage de la Baule",
+                date: "Samedi 22 Mars 2025",
+                horaire: "10:00 - 13:00",
+                plage: "Plage de la Baule",
+                lieu: "La Baule"
+            },
+            {
+                id: 4,
+                titre: "Clean-up Plage de Biarritz",
+                date: "Dimanche 23 Mars 2025",
+                horaire: "08:30 - 11:30",
+                plage: "Grande Plage de Biarritz",
+                lieu: "Biarritz"
+            }
+        ];
+
+        let selectedSessionId = null;
+
+        // Générer les sessions
+        function renderSessions() {
+            const sessionList = document.getElementById('sessionList');
+            sessionList.innerHTML = sessions.map(session => `
+                <div class="session-item" data-id="${session.id}">
+                    <div class="session-header">
+                        <div>
+                            <div class="session-title">${session.titre}</div>
+                        </div>
+                        <button class="select-btn" onclick="selectSession(${session.id})">
+                            Sélectionner
+                        </button>
+                    </div>
+                    <div class="session-info">
+                        <div class="info-row">
+                            <span class="info-icon">📅</span>
+                            <span>${session.date}</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-icon">🕐</span>
+                            <span>${session.horaire}</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-icon">🏖️</span>
+                            <span>${session.plage}</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-icon">📍</span>
+                            <span>${session.lieu}</span>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Sélectionner une session
+        function selectSession(sessionId) {
+            selectedSessionId = sessionId;
+            
+            // Mettre à jour l'apparence des sessions
+            document.querySelectorAll('.session-item').forEach(item => {
+                item.classList.remove('selected');
+                const btn = item.querySelector('.select-btn');
+                btn.textContent = 'Sélectionner';
+                btn.classList.remove('selected');
+            });
+
+            const selectedItem = document.querySelector(`[data-id="${sessionId}"]`);
+            selectedItem.classList.add('selected');
+            const selectedBtn = selectedItem.querySelector('.select-btn');
+            selectedBtn.textContent = '✓ Sélectionné';
+            selectedBtn.classList.add('selected');
+
+            // Afficher le formulaire
+            document.getElementById('registrationForm').classList.add('active');
+            document.getElementById('successMessage').classList.remove('active');
+            
+            // Scroll vers le formulaire
+            document.getElementById('registrationForm').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Gérer la soumission du formulaire
+        document.getElementById('userForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = {
+                sessionId: selectedSessionId,
+                nom: document.getElementById('nom').value,
+                prenom: document.getElementById('prenom').value,
+                email: document.getElementById('email').value,
+                telephone: document.getElementById('telephone').value,
+                adresse: document.getElementById('adresse').value,
+                codePostal: document.getElementById('codePostal').value
+            };
+
+            // Afficher les données dans la console (à remplacer par un envoi au serveur)
+            console.log('Inscription enregistrée:', formData);
+
+            // Masquer le formulaire et afficher le message de succès
+            document.getElementById('registrationForm').classList.remove('active');
+            document.getElementById('successMessage').classList.add('active');
+            
+            // Réinitialiser le formulaire
+            this.reset();
+
+            // Scroll vers le message de succès
+            document.getElementById('successMessage').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        // Initialiser la page
+        renderSessions();
+    </script>
+</body>
+</html>

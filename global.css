@@ -401,7 +401,46 @@ select#sujet {
   border-radius: var(--rayon);
   border: 1px solid #ccc;
 } 
+.filter-section {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
 
+.filter-section h3 {
+  margin: 0 0 15px 0;
+  color: #2c3e50;
+  font-size: 1.1em;
+}
+
+.filter-buttons {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  padding: 8px 16px;
+  border: 2px solid #3498db;
+  background: white;
+  color: #3498db;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9em;
+  transition: all 0.3s ease;
+}
+
+.filter-btn:hover {
+  background: #e3f2fd;
+
+}
+
+.filter-btn.active {
+  background: #3498db;
+  color: white;
+}
 /* ANIMATIONS */
 @keyframes fadeIn {
   from {

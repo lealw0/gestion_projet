@@ -7,9 +7,9 @@ document.addEventListener("DOMContentLoaded", () => {
       <h1>Diwallerien ar Vorlen</h1>
       <p class="subtitle">Les sentinelles de la rade</p>
       <nav>
-        <a href="acceuil.html">Accueil</a>
+        <a href="acceuil/acceuil.html">Accueil</a>
         <a href="page2_V1.html">Evenements</a>
-        <a href="contact.html">Contact</a>
+        <a href="formulaire/formulaire.html">Contact</a>
       </nav>
     </div>
   `;
